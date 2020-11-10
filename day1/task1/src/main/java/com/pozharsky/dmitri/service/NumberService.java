@@ -1,11 +1,24 @@
 package com.pozharsky.dmitri.service;
 
-import com.pozharsky.dmitri.constant.Digit;
-
 public class NumberService {
 
-    public int defineLastDigitSquareNumber(Digit lastDigitNumber) {
-        switch (lastDigitNumber) {
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
+    private static final int FIVE = 5;
+    private static final int SIX = 6;
+    private static final int SEVEN = 7;
+    private static final int EIGHT = 8;
+    private static final int NINE = 9;
+
+    public int defineLastDigitSquareNumber(int number) {
+        return getLastDigitSquareNumber(getLastDigitNumber(number));
+    }
+
+    private int getLastDigitSquareNumber(int digit) {
+        switch (digit) {
             case ZERO:
                 return 0;
             case ONE:
@@ -23,11 +36,11 @@ public class NumberService {
             case FIVE:
                 return 5;
             default:
-                throw new IllegalStateException("Unknown enumeration value " + lastDigitNumber);
+                throw new IllegalStateException("Unknown digit value " + digit);
         }
     }
 
-    public int getLastDigitNumber(int number) {
-        return number % 10;
+    private int getLastDigitNumber(int number) {
+        return number >= -9 && number <= 9 ? Math.abs(number) : Math.abs(number % 10);
     }
 }
