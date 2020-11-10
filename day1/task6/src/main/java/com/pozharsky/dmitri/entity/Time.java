@@ -1,5 +1,7 @@
 package com.pozharsky.dmitri.entity;
 
+import java.util.Objects;
+
 public final class Time {
     private final int hour;
     private final int minute;
@@ -21,6 +23,21 @@ public final class Time {
 
     public int getSecond() {
         return second;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Time)) return false;
+        Time time = (Time) o;
+        return hour == time.hour &&
+                minute == time.minute &&
+                second == time.second;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hour, minute, second);
     }
 
     @Override
