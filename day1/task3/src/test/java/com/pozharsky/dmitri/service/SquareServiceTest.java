@@ -9,19 +9,22 @@ import static org.testng.Assert.assertEquals;
 
 public class SquareServiceTest {
     private SquareService squareService;
+    private Square square;
 
     @BeforeMethod
     public void setUp() {
         squareService = new SquareService();
+        square = new Square(9);
     }
 
     @AfterMethod
     public void tearDown() {
         squareService = null;
+        square = null;
     }
 
     @Test
     public void testDefineSquareAreaInCircle() {
-        assertEquals(squareService.defineSquareAreaInCircle(new Square(9)), 4.5);
+        assertEquals(squareService.defineSquareAreaInCircle(square), 4.5);
     }
 }

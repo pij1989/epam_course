@@ -8,20 +8,26 @@ import static org.testng.Assert.*;
 
 public class NumberServiceTest {
     private NumberService numberService;
+    private int perfectNumber;
+    private int unperfectNumber;
 
     @BeforeMethod
     public void setUp() {
         numberService = new NumberService();
+        perfectNumber = 28;
+        unperfectNumber = 20;
     }
 
     @AfterMethod
     public void tearDown() {
         numberService = null;
+        perfectNumber = 0;
+        unperfectNumber = 0;
     }
 
     @Test
     public void testIsPerfectNumber() {
-        assertTrue(numberService.isPerfectNumber(28));
-        assertFalse(numberService.isPerfectNumber(20));
+        assertTrue(numberService.isPerfectNumber(perfectNumber));
+        assertFalse(numberService.isPerfectNumber(unperfectNumber));
     }
 }
