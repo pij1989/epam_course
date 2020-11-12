@@ -16,6 +16,9 @@
         <module>task5</module>
         <module>task6</module>
         <module>task7</module>
+        <module>task8</module>
+        <module>task9</module>
+        <module>task10</module>
     </modules>
 
     <properties>
@@ -33,7 +36,11 @@
                 <version>6.14.3</version>
                 <scope>test</scope>
             </dependency>
-
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itextpdf</artifactId>
+                <version>5.5.10</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
