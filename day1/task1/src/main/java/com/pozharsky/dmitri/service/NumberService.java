@@ -14,10 +14,10 @@ public class NumberService {
     private static final int NINE = 9;
 
     public int defineLastDigitSquareNumber(int number) {
-        return getLastDigitSquareNumber(getLastDigitNumber(number));
+        return searchLastDigitSquareNumber(searchLastDigitNumber(number));
     }
 
-    private int getLastDigitSquareNumber(int digit) {
+    private int searchLastDigitSquareNumber(int digit) {
         switch (digit) {
             case ZERO:
                 return 0;
@@ -40,7 +40,7 @@ public class NumberService {
         }
     }
 
-    private int getLastDigitNumber(int number) {
+    private int searchLastDigitNumber(int number) {
         return number >= -9 && number <= 9 ? Math.abs(number) : Math.abs(number % 10);
     }
 }
