@@ -5,10 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import static org.testng.AssertJUnit.assertEquals;
 
 public class NumberServiceTest {
