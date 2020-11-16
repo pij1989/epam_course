@@ -1,48 +1,48 @@
 package com.pozharsky.dmitri.entity;
 
-import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import com.pozharsky.dmitri.exception.CarException;
 
-public class Garage {
-    private Car[] cars;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Garage implements Iterable<Car> {
+    private List<Car> cars;
+
+    private Garage() {
+        this.cars = new ArrayList<>();
+    }
 
     public Garage(Car... cars) {
-        this.cars = cars;
+        this.cars = Arrays.stream(cars)
+                .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByMark(String mark) {
-        List<Car> list = new LinkedList<>();
-        for (int i = 0; i < cars.length; i++) {
-            Car car = cars[i];
-            if (car.getMark().equals(mark)) {
-                list.add(car);
-            }
+    public boolean addCar(Car car) throws CarException {
+        if (car == null) {
+            throw new CarException("You can not add zero car");
         }
-        return list.size() != 0 ? list : null;
+        return cars.add(car);
     }
 
-    public List<Car> findCarByModelAndExploitationPeriodGt(String model, int period) {
-        List<Car> list = new LinkedList<>();
-        LocalDate date = LocalDate.now();
-        int year = date.getYear();
-        for (int i = 0; i < cars.length; i++) {
-            Car car = cars[i];
-            if ((car.getModel().equals(model)) && (year - car.getYearManufacture() > period)) {
-                list.add(car);
-            }
+    public Car getCar(int index) throws CarException {
+        if (index < 0 || index >= cars.size()) {
+            throw new CarException("Garage can not have place less then zero and more then capacity of garage");
         }
-        return list.size() != 0 ? list : null;
+        return cars.get(index);
     }
 
-    public List<Car> findCarByYearManufactureAndPriceGt(int year, double price) {
-        List<Car> list = new LinkedList<>();
-        for (int i = 0; i < cars.length; i++) {
-            Car car = cars[i];
-            if (car.getYearManufacture() == year && car.getPrice() > price) {
-                list.add(car);
-            }
+    public Car removeCar(int index) throws CarException {
+        if (index < 0 || index >= cars.size()) {
+            throw new CarException("Car with given index does not locate in garage");
         }
-        return list.size() != 0 ? list : null;
+        return cars.remove(index);
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return cars.iterator();
     }
 }

@@ -1,7 +1,5 @@
 package com.pozharsky.dmitri.entity;
 
-import java.util.Objects;
-
 public class Point {
     private int x;
     private int y;
@@ -31,14 +29,18 @@ public class Point {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Point point = (Point) o;
-        return getX() == point.getX() &&
-                getY() == point.getY();
+
+        if (x != point.x) return false;
+        return y == point.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getX(), getY());
+        int result = x;
+        result = 31 * result + y;
+        return result;
     }
 
     @Override

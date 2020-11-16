@@ -1,19 +1,18 @@
 package com.pozharsky.dmitri.entity;
 
-import java.util.Objects;
-
 public class Car {
     private int id;
-    private String mark;
+    private Mark mark;
     private String model;
     private int yearManufacture;
-    private String color;
+    private Color color;
     private double price;
+    private String registrationNumber;
 
     public Car() {
     }
 
-    public Car(int id, String mark, String model, int yearManufacture, String color, double price, String registrationNumber) {
+    public Car(int id, Mark mark, String model, int yearManufacture, Color color, double price, String registrationNumber) {
         this.id = id;
         this.mark = mark;
         this.model = model;
@@ -31,11 +30,11 @@ public class Car {
         this.id = id;
     }
 
-    public String getMark() {
+    public Mark getMark() {
         return mark;
     }
 
-    public void setMark(String mark) {
+    public void setMark(Mark mark) {
         this.mark = mark;
     }
 
@@ -55,11 +54,11 @@ public class Car {
         this.yearManufacture = yearManufacture;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -79,35 +78,45 @@ public class Car {
         this.registrationNumber = registrationNumber;
     }
 
-    private String registrationNumber;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Car car = (Car) o;
-        return getId() == car.getId() &&
-                getYearManufacture() == car.getYearManufacture() &&
-                Double.compare(car.getPrice(), getPrice()) == 0 &&
-                Objects.equals(getMark(), car.getMark()) &&
-                Objects.equals(getModel(), car.getModel()) &&
-                Objects.equals(getColor(), car.getColor()) &&
-                Objects.equals(getRegistrationNumber(), car.getRegistrationNumber());
+
+        if (id != car.id) return false;
+        if (yearManufacture != car.yearManufacture) return false;
+        if (Double.compare(car.price, price) != 0) return false;
+        if (mark != car.mark) return false;
+        if (model != null ? !model.equals(car.model) : car.model != null) return false;
+        if (color != car.color) return false;
+        return registrationNumber != null ? registrationNumber.equals(car.registrationNumber) : car.registrationNumber == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getMark(), getModel(), getYearManufacture(), getColor(), getPrice(), getRegistrationNumber());
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (mark != null ? mark.hashCode() : 0);
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + yearManufacture;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (registrationNumber != null ? registrationNumber.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Car{");
         sb.append("id=").append(id);
-        sb.append(", mark='").append(mark).append('\'');
+        sb.append(", mark=").append(mark);
         sb.append(", model='").append(model).append('\'');
         sb.append(", yearManufacture=").append(yearManufacture);
-        sb.append(", color='").append(color).append('\'');
+        sb.append(", color=").append(color);
         sb.append(", price=").append(price);
         sb.append(", registrationNumber='").append(registrationNumber).append('\'');
         sb.append('}');
