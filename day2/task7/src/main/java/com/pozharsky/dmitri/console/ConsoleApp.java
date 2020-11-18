@@ -6,6 +6,7 @@ import com.pozharsky.dmitri.entity.Month;
 import com.pozharsky.dmitri.report.BirthdayReport;
 import com.pozharsky.dmitri.service.BirthdayService;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class ConsoleApp {
@@ -16,6 +17,7 @@ public class ConsoleApp {
         Scanner scanner = new Scanner(System.in);
         BirthdayService birthdayService = new BirthdayService();
         BirthdayReport birthdayReport = new BirthdayReport();
+        Calendar calendar = Calendar.getInstance();
         while (true) {
             System.out.println("Enter day of birthday:");
             int day = scanner.nextInt();
@@ -25,10 +27,10 @@ public class ConsoleApp {
             int year = scanner.nextInt();
             BirthdayDate birthdayDate = new BirthdayDate(year, Month.values()[month - 1], day);
             DayOfWeek dayOfWeek = birthdayService.defineBirthdayDayOfWeek(birthdayDate);
-            int fullYears = birthdayService.defineFullYearsOld(birthdayDate);
+            int fullYears = birthdayService.defineFullYearsOld(birthdayDate, calendar);
             birthdayReport.printBirthdayDayOfWeek(dayOfWeek);
             birthdayReport.printFullYearsOld(fullYears);
-            if (birthdayService.isBirthdayToday(birthdayDate)) {
+            if (birthdayService.isBirthdayToday(birthdayDate, calendar)) {
                 birthdayReport.printCongratulations();
             }
             System.out.println("Do you want to exit? Yes [Y], No[N]");

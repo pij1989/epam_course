@@ -17,13 +17,11 @@ public class BirthdayService {
         return DayOfWeek.values()[calendar.get(DAY_OF_WEEK) - 2];
     }
 
-    public int defineFullYearsOld(BirthdayDate birthdayDate) {
-        Calendar calendar = Calendar.getInstance();
+    public int defineFullYearsOld(BirthdayDate birthdayDate, Calendar calendar) {
         return calendar.get(YEAR) - birthdayDate.getYear();
     }
 
-    public boolean isBirthdayToday(BirthdayDate birthdayDate) {
-        Calendar calendar = Calendar.getInstance();
+    public boolean isBirthdayToday(BirthdayDate birthdayDate, Calendar calendar) {
         return calendar.get(DATE) == birthdayDate.getDay();
     }
 }
