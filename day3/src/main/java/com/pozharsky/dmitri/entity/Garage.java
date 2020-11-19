@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class Garage implements Iterable<Car> {
     private List<Car> cars;
 
-    private Garage() {
+    public Garage() {
         this.cars = new ArrayList<>();
     }
 
@@ -44,5 +44,28 @@ public class Garage implements Iterable<Car> {
     @Override
     public Iterator<Car> iterator() {
         return cars.iterator();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Garage garage = (Garage) o;
+
+        return cars != null ? cars.equals(garage.cars) : garage.cars == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return cars != null ? cars.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Garage{");
+        sb.append("cars=").append(cars);
+        sb.append('}');
+        return sb.toString();
     }
 }
