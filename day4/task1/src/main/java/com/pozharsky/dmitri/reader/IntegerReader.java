@@ -27,7 +27,8 @@ public class IntegerReader {
                 }
             }
         } catch (FileNotFoundException e) {
-            logger.error("File is not found: " + e);
+            logger.fatal("File is not found: " + e);
+            throw new RuntimeException(e);
         } catch (IOException e) {
             logger.error("Error of file: " + e);
         }

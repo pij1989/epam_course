@@ -203,7 +203,6 @@ public class IntegerArrayService {
             }
         } catch (IntegerArrayException e) {
             logger.error(e);
-            throw new ArrayIndexOutOfBoundsException(String.valueOf(e));
         }
     }
 }

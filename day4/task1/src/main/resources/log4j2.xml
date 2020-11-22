@@ -6,25 +6,23 @@
         </Console>
         <RollingFile
                 name="rollingFile"
-                fileName="log/log.txt"
-                filePattern="log/log.%d{dd-MMM}.txt.gz"
-                ignoreExceptions="false">
+                fileName="logs/log.txt"
+                filePattern="logs/${date:yyyy-MM-dd}/log.%d{yyyy-MM-dd_HH-mm}_%i.txt"
+                append="true">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
             </PatternLayout>
             <Policies>
-                <SizeBasedTriggeringPolicy size="1MB"/>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="25KB"/>
             </Policies>
-            <DefaultRolloverStrategy max="5"/>
+            <DefaultRolloverStrategy max="10"/>
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="com.pozharsky.dmitri" level="info" additivity="false">
+        <Root level="debug">
             <AppenderRef ref="console"/>
             <AppenderRef ref="rollingFile"/>
-        </Logger>
-        <Root level="error">
-            <AppenderRef ref="console"/>
         </Root>
     </Loggers>
 </Configuration>
