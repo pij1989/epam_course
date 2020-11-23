@@ -12,27 +12,39 @@ public class JaggedIntegerArrayService {
     private IntegerArrayService integerArrayService = new IntegerArrayService();
 
     public void bubleSortByMaxElementInLine(JaggedIntegerArray jaggedIntegerArray, Order order) {
-        bubleSortByMaxElementInLine(jaggedIntegerArray.getIntegerArrays(), order);
+        switch (order) {
+            case ASCENDING: {
+                bubleSortByMaxElementInLineAsc(jaggedIntegerArray.getIntegerArrays());
+                break;
+            }
+            case DESCENDING: {
+                bubleSortByMaxElementInLineDesc(jaggedIntegerArray.getIntegerArrays());
+                break;
+            }
+            default: {
+                String msg = "Unknown order value " + order;
+                logger.fatal(msg);
+                throw new IllegalStateException(msg);
+            }
+        }
     }
 
-    private void bubleSortByMaxElementInLine(IntegerArray[] integerArrays, Order order) {
+    private void bubleSortByMaxElementInLineAsc(IntegerArray[] integerArrays) {
         for (int i = integerArrays.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-                switch (order) {
-                    case ASCENDING: {
-                        sortAsc(integerArrays, j, j + 1, integerArrayService.max(integerArrays[j]), integerArrayService.max(integerArrays[j + 1]));
-                        break;
-                    }
-                    case DESCENDING: {
-                        sortDesc(integerArrays, j, j + 1, integerArrayService.max(integerArrays[j]), integerArrayService.max(integerArrays[j + 1]));
-                        break;
-                    }
-                    default: {
-                        String msg = "Unknown order value " + order;
-                        logger.fatal(msg);
-                        throw new IllegalStateException(msg);
-                    }
-                }
+                int previous = integerArrayService.max(integerArrays[j]);
+                int next = integerArrayService.max(integerArrays[j + 1]);
+                sortAsc(integerArrays, j, j + 1, previous, next);
+            }
+        }
+    }
+
+    private void bubleSortByMaxElementInLineDesc(IntegerArray[] integerArrays) {
+        for (int i = integerArrays.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                int previous = integerArrayService.max(integerArrays[j]);
+                int next = integerArrayService.max(integerArrays[j + 1]);
+                sortDesc(integerArrays, j, j + 1, previous, next);
             }
         }
     }
@@ -54,5 +66,4 @@ public class JaggedIntegerArrayService {
         integerArrays[previousIndex] = integerArrays[nextIndex];
         integerArrays[nextIndex] = temp;
     }
-
 }

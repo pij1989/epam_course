@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class IntegerReaderTest {
-    static final String FILE = "..\\data\\integers.txt";
-    static final String FILE_NOT_EXIST = "..\\data\\test.txt";
+    static final String FILE = "src\\test\\resources\\test_integers.txt";
+    static final String FILE_NOT_EXIST = "\\data\\test.txt";
     IntegerReader integerReader;
 
     @BeforeMethod
