@@ -27,17 +27,17 @@ public class IntegerArrayServiceTest {
 
     @Test
     public void testQuickSort() {
-        IntegerArray expect = new IntegerArray(5, 8, 13, 21, 31, 287, 557, 775, 831);
         integerArrayService.quickSort(integerArray);
         IntegerArray actual = integerArray;
+        IntegerArray expect = new IntegerArray(5, 8, 13, 21, 31, 287, 557, 775, 831);
         assertEquals(actual, expect);
     }
 
     @Test
     public void testBubleSort() {
-        IntegerArray expect = new IntegerArray(5, 8, 13, 21, 31, 287, 557, 775, 831);
         integerArrayService.bubleSort(integerArray);
         IntegerArray actual = integerArray;
+        IntegerArray expect = new IntegerArray(5, 8, 13, 21, 31, 287, 557, 775, 831);
         assertEquals(actual, expect);
     }
 

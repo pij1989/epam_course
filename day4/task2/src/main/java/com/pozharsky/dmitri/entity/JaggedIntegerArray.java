@@ -18,12 +18,15 @@ public class JaggedIntegerArray {
         return integerArrays[index];
     }
 
-    public IntegerArray[] getIntegerArrays() {
-        return integerArrays;
+    public void setIntegerArray(int index, IntegerArray value) throws JaggedIntegerArrayException {
+        if (index < 0 || index >= integerArrays.length) {
+            throw new JaggedIntegerArrayException("Index less then zero or more then size of jagged integer array");
+        }
+        integerArrays[index] = value;
     }
 
-    public void setIntegerArrays(IntegerArray[] integerArrays) {
-        this.integerArrays = integerArrays;
+    public int getSize(){
+        return integerArrays.length;
     }
 
     @Override
